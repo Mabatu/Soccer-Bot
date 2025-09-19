@@ -62,8 +62,8 @@ void processGamepad(ControllerPtr ctl) {
 
   int LY = ctl->axisY();
   int RX = ctl->axisRX();
-  int L2 = ctl->throttle();
-  int R2 = ctl->brake();
+  int L2 = ctl->brake();
+  int R2 = ctl->throttle();
   int buttons = ctl->buttons();
 
   //Controls for right wheels.
@@ -114,7 +114,7 @@ void processGamepad(ControllerPtr ctl) {
     analogWrite(rightWheels, dutyCycle);
   }
 
-if (RX > NEUTRAL_POINT - DEAD_ZONE) {
+  if (RX > NEUTRAL_POINT + DEAD_ZONE) {
     //Set direction.
     digitalWrite(RF, LOW);
     digitalWrite(RB, HIGH);
@@ -122,12 +122,12 @@ if (RX > NEUTRAL_POINT - DEAD_ZONE) {
     digitalWrite(LB, LOW);
 
     //Set speed.
-    int dutyCycle = map(LY, (NEUTRAL_POINT - DEAD_ZONE - 1), -508, MIN_SPEED, MAX_SPEED);
+    int dutyCycle = map(RX, (NEUTRAL_POINT + DEAD_ZONE + 1), 512, MIN_SPEED, MAX_SPEED);
     analogWrite(rightWheels, dutyCycle);
     analogWrite(leftWheels, dutyCycle);
   }
 
-  else if (RX < NEUTRAL_POINT + DEAD_ZONE) {
+  else if (RX < NEUTRAL_POINT - DEAD_ZONE) {
     //Set direction.
     digitalWrite(RF, HIGH);
     digitalWrite(RB, LOW);
@@ -135,27 +135,29 @@ if (RX > NEUTRAL_POINT - DEAD_ZONE) {
     digitalWrite(LB, HIGH);
 
     //Set speed.
-    int dutyCycle = map(LY, (NEUTRAL_POINT + DEAD_ZONE + 1), 512, MIN_SPEED, MAX_SPEED);
+    int dutyCycle = map(RX, (NEUTRAL_POINT - DEAD_ZONE - 1), -508, MIN_SPEED, MAX_SPEED);
     analogWrite(leftWheels, dutyCycle);
     analogWrite(rightWheels, dutyCycle);
   }
   if (L2 > 4) {
-    digitalWrite(RF, HIGH);
-    digitalWrite(RB, LOW);
-    digitalWrite(LF, HIGH);
-    digitalWrite(LB, LOW);
-
-    analogWrite(rightWheels, L2);
-    analogWrite(leftWheels, L2);
-  }
-  if (R2 > 4) {
     digitalWrite(RF, LOW);
     digitalWrite(RB, HIGH);
     digitalWrite(LF, LOW);
     digitalWrite(LB, HIGH);
 
-    analogWrite(rightWheels, R2);
-    analogWrite(leftWheels, R2);
+    int dutyCycle = map(L2, 0, 1023, MIN_SPEED, MAX_SPEED);
+    analogWrite(rightWheels, dutyCycle);
+    analogWrite(leftWheels, dutyCycle);
+  }
+  if (R2 > 4) {
+    digitalWrite(RF, HIGH);
+    digitalWrite(RB, LOW);
+    digitalWrite(LF, HIGH);
+    digitalWrite(LB, LOW);
+
+    int dutyCycle = map(R2, 0, 1023, MIN_SPEED, MAX_SPEED);
+    analogWrite(rightWheels, dutyCycle);
+    analogWrite(leftWheels, dutyCycle);
   }
 }
 
