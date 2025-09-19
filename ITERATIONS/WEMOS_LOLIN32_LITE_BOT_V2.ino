@@ -66,27 +66,6 @@ void processGamepad(ControllerPtr ctl) {
   int R2 = ctl->throttle();
   int buttons = ctl->buttons();
 
-  //Controls for right wheels.
-  /* if (RY < NEUTRAL_POINT - DEAD_ZONE) {
-    //Set direction.
-    digitalWrite(RF, HIGH);
-    digitalWrite(RB, LOW);
-
-    //Set speed.
-    int dutyCycle = map(RY, (NEUTRAL_POINT - DEAD_ZONE - 1), -508, MIN_SPEED, MAX_SPEED);
-    analogWrite(rightWheels, dutyCycle);
-  }
-
-  else if (RY > NEUTRAL_POINT + DEAD_ZONE) {
-    //Set direction.
-    digitalWrite(RF, LOW);
-    digitalWrite(RB, HIGH);
-
-    //Set speed.
-    int dutyCycle = map(RY, (NEUTRAL_POINT + DEAD_ZONE + 1), 512, MIN_SPEED, MAX_SPEED);
-    analogWrite(rightWheels, dutyCycle);
-  }*/
-
   //Controls for left wheels.
   if (LY < NEUTRAL_POINT - DEAD_ZONE) {
     //Set direction.
