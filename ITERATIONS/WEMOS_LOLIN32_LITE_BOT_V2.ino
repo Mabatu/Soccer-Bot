@@ -1,7 +1,7 @@
 #include <Bluepad32.h>
 
-#define rightWheels 32
-#define leftWheels 33
+#define rightWheels 33
+#define leftWheels 32
 
 #define RF 22
 #define RB 19
