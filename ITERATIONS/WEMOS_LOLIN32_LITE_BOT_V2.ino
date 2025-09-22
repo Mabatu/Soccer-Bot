@@ -3,10 +3,10 @@
 #define rightWheels 33
 #define leftWheels 32
 
-#define RF 22
-#define RB 19
-#define LF 23
-#define LB 18
+#define RightWheelsForward 22
+#define RightWheelsReverse 19
+#define LeftWheelsForward 23
+#define LeftWheelsReverse 18
 
 #define NEUTRAL_POINT 4
 #define DEAD_ZONE 4
@@ -52,10 +52,10 @@ void onDisconnectedController(ControllerPtr ctl) {
 
 void processGamepad(ControllerPtr ctl) {
   //All motors off -> direction control.
-  digitalWrite(RF, LOW);
-  digitalWrite(RB, LOW);
-  digitalWrite(LF, LOW);
-  digitalWrite(LB, LOW);
+  digitalWrite(RightWheelsForward, LOW);
+  digitalWrite(RightWheelsReverse, LOW);
+  digitalWrite(LeftWheelsForward, LOW);
+  digitalWrite(LeftWheelsReverse, LOW);
 
   analogWrite(leftWheels, 0);
   analogWrite(rightWheels, 0);
@@ -69,10 +69,10 @@ void processGamepad(ControllerPtr ctl) {
   //Controls for left wheels.
   if (LY < NEUTRAL_POINT - DEAD_ZONE) {
     //Set direction.
-    digitalWrite(RF, HIGH);
-    digitalWrite(RB, LOW);
-    digitalWrite(LF, HIGH);
-    digitalWrite(LB, LOW);
+    digitalWrite(RightWheelsForward, HIGH);
+    digitalWrite(RightWheelsReverse, LOW);
+    digitalWrite(LeftWheelsForward, HIGH);
+    digitalWrite(LeftWheelsReverse, LOW);
 
     //Set speed.
     int dutyCycle = map(LY, (NEUTRAL_POINT - DEAD_ZONE - 1), -508, MIN_SPEED, MAX_SPEED);
@@ -82,10 +82,10 @@ void processGamepad(ControllerPtr ctl) {
 
   else if (LY > NEUTRAL_POINT + DEAD_ZONE) {
     //Set direction.
-    digitalWrite(RF, LOW);
-    digitalWrite(RB, HIGH);
-    digitalWrite(LF, LOW);
-    digitalWrite(LB, HIGH);
+    digitalWrite(RightWheelsForward, LOW);
+    digitalWrite(RightWheelsReverse, HIGH);
+    digitalWrite(LeftWheelsForward, LOW);
+    digitalWrite(LeftWheelsReverse, HIGH);
 
     //Set speed.
     int dutyCycle = map(LY, (NEUTRAL_POINT + DEAD_ZONE + 1), 512, MIN_SPEED, MAX_SPEED);
@@ -95,10 +95,10 @@ void processGamepad(ControllerPtr ctl) {
 
   if (RX > NEUTRAL_POINT + DEAD_ZONE) {
     //Set direction.
-    digitalWrite(RF, LOW);
-    digitalWrite(RB, HIGH);
-    digitalWrite(LF, HIGH);
-    digitalWrite(LB, LOW);
+    digitalWrite(RightWheelsForward, LOW);
+    digitalWrite(RightWheelsReverse, HIGH);
+    digitalWrite(LeftWheelsForward, HIGH);
+    digitalWrite(LeftWheelsReverse, LOW);
 
     //Set speed.
     int dutyCycle = map(RX, (NEUTRAL_POINT + DEAD_ZONE + 1), 512, MIN_SPEED, MAX_SPEED);
@@ -108,10 +108,10 @@ void processGamepad(ControllerPtr ctl) {
 
   else if (RX < NEUTRAL_POINT - DEAD_ZONE) {
     //Set direction.
-    digitalWrite(RF, HIGH);
-    digitalWrite(RB, LOW);
-    digitalWrite(LF, LOW);
-    digitalWrite(LB, HIGH);
+    digitalWrite(RightWheelsForward, HIGH);
+    digitalWrite(RightWheelsReverse, LOW);
+    digitalWrite(LeftWheelsForward, LOW);
+    digitalWrite(LeftWheelsReverse, HIGH);
 
     //Set speed.
     int dutyCycle = map(RX, (NEUTRAL_POINT - DEAD_ZONE - 1), -508, MIN_SPEED, MAX_SPEED);
@@ -119,20 +119,20 @@ void processGamepad(ControllerPtr ctl) {
     analogWrite(rightWheels, dutyCycle);
   }
   if (L2 > 4) {
-    digitalWrite(RF, LOW);
-    digitalWrite(RB, HIGH);
-    digitalWrite(LF, LOW);
-    digitalWrite(LB, HIGH);
+    digitalWrite(RightWheelsForward, LOW);
+    digitalWrite(RightWheelsReverse, HIGH);
+    digitalWrite(LeftWheelsForward, LOW);
+    digitalWrite(LeftWheelsReverse, HIGH);
 
     int dutyCycle = map(L2, 0, 1023, MIN_SPEED, MAX_SPEED);
     analogWrite(rightWheels, dutyCycle);
     analogWrite(leftWheels, dutyCycle);
   }
   if (R2 > 4) {
-    digitalWrite(RF, HIGH);
-    digitalWrite(RB, LOW);
-    digitalWrite(LF, HIGH);
-    digitalWrite(LB, LOW);
+    digitalWrite(RightWheelsForward, HIGH);
+    digitalWrite(RightWheelsReverse, LOW);
+    digitalWrite(LeftWheelsForward, HIGH);
+    digitalWrite(LeftWheelsReverse, LOW);
 
     int dutyCycle = map(R2, 0, 1023, MIN_SPEED, MAX_SPEED);
     analogWrite(rightWheels, dutyCycle);
@@ -154,13 +154,14 @@ void processControllers() {
 
 void setup() {
   //direction control for motors, for use with L298 motor driver
-  pinMode(RF, OUTPUT);
-  pinMode(RB, OUTPUT);
-  pinMode(LF, OUTPUT);
-  pinMode(LB, OUTPUT);
+  pinMode(RightWheelsForward, OUTPUT);
+  pinMode(RightWheelsReverse, OUTPUT);
+  pinMode(LeftWheelsForward, OUTPUT);
+  pinMode(LeftWheelsReverse, OUTPUT);
 
   //PWM pins to control speed of wheels
   pinMode(rightWheels, OUTPUT);
+  
   pinMode(leftWheels, OUTPUT);
 
 
