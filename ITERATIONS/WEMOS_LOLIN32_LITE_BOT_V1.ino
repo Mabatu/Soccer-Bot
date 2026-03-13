@@ -1,15 +1,20 @@
 #include <Bluepad32.h>
 
+// GPIO pins to control motor speed for left and right wheels
 #define rightWheels 33
 #define leftWheels 32
 
+//GPIO pins to control the direction of motors
 #define RightWheelsForward 22
 #define RightWheelsReverse 19
 #define LeftWheelsForward 23
 #define LeftWheelsReverse 18
 
+//Joystick points
 #define NEUTRAL_POINT 4
 #define DEAD_ZONE 4
+
+//Motor speed range: PWM signal set to 10 bit resolution
 #define MAX_SPEED 1023
 #define MIN_SPEED 200
 
@@ -60,12 +65,12 @@ void processGamepad(ControllerPtr ctl) {
   analogWrite(leftWheels, 0);
   analogWrite(rightWheels, 0);
 
-  int LY = ctl->axisY();
-  int RY = ctl->axisRY();
-  int L2 = ctl->throttle();
-  int R2 = ctl->brake();
-  int buttons = ctl->buttons();
-
+  //Picking joystick values
+  int LY = ctl->axisY();    //Left joystick y axis
+  int RY = ctl->axisRY();   //Right joystick y axis
+  int L2 = ctl->throttle(); //Left trigger
+  int R2 = ctl->brake();   //Right trigger
+  
   //Controls for right wheels.
   if (RY < NEUTRAL_POINT - DEAD_ZONE) {
     //Set direction.
