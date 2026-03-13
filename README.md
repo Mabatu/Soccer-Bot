@@ -1,5 +1,19 @@
 # Introduction
 This repository contains the firmware for a four-wheeled mobile robot controlled by an ESP32 and driven by an L298N motor driver. The project utilizes the Wemos Lolin32 Lite development board, selected for its compact form factor and integrated wireless capabilities (Wi-Fi and Bluetooth). By using the ESP32, the need for external communication modules is eliminated. Furthermore, the board's native support for Li-Po and Li-Ion battery management simplifies the power overhead.
+This repository has three files in the `ITERATIONS` folder
+This repository contains three files in the ITERATIONS folder:
+1. WEMOS LOLIN LITE 32 V1:
+The robot operates in tank drive mode.
+The left joystick Y-axis on the PS4 controller controls the left wheels.
+The right joystick Y-axis controls the right wheels.
+2. WEMOS LOLIN LITE 32 V2
+The robot operates in arcade drive mode.
+The left joystick Y-axis controls forward and backward movement.
+The right joystick Y-axis controls clockwise and counterclockwise point turns.
+3. directmapping
+This version uses the same arcade control scheme as V2, but replaces Arduino’s built-in map() function.
+Instead of mapping joystick values from -512 to 512 into the range -1023 to 1023, the program performs direct value scaling by:
+Taking the absolute value of the joystick input and doubling the magnitude. This approach reduces computational overhead slightly, making the program marginally faster.
 # Chassis
 The objective of the game is to maneuver a small rubber ball into your opponent's goal. A match lasts for 5 minutes. To assist in pushing the ball toward the opponent's goal, a small scoop is attached to the front of the robot.
 The chassis utilized for this robot is an off-the-shelf model that includes four geared motors (TT 130) paired with four 60mm wheels. The chassis consists of two 2mm thick acrylic sheets, which are joined together using brass standoffs and M3 bolts. The acrylic plates feature cutouts designed to accommodate plastic brackets that hold the motors in place.
