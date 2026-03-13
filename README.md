@@ -10,7 +10,7 @@ The robot operates in arcade drive mode.
 The left joystick Y-axis controls forward and backward movement.
 The right joystick Y-axis controls clockwise and counterclockwise point turns.
 3. `direct_mapping.ino`
-This version uses the same arcade control scheme as V2, but replaces Arduino’s built-in map() function.
+This version uses the same arcade control scheme as V2, but replaces Arduino’s built-in `map()` function.
 Instead of mapping joystick values from -512 to 512 into the range -1023 to 1023, the program performs direct value scaling by:
 Taking the absolute value of the joystick input and doubling the magnitude. This approach reduces computational overhead slightly, making the program marginally faster.
 # Chassis
