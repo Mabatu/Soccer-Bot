@@ -1,12 +1,11 @@
 # Introduction
 This repository contains the firmware for a four-wheeled mobile robot controlled by an ESP32 and driven by an L298N motor driver. The project utilizes the Wemos Lolin32 Lite development board, selected for its compact form factor and integrated wireless capabilities (Wi-Fi and Bluetooth). By using the ESP32, the need for external communication modules is eliminated. Furthermore, the board's native support for Li-Po and Li-Ion battery management simplifies the power overhead.
-This repository has three files in the `ITERATIONS` folder
-This repository contains three files in the ITERATIONS folder:
-1. WEMOS LOLIN LITE 32 V1:
+This repository has three files in the `ITERATIONS` folder:
+1. `WEMOS_LOLIN32_LITE_BOT_V1.ino`:
 The robot operates in tank drive mode.
 The left joystick Y-axis on the PS4 controller controls the left wheels.
 The right joystick Y-axis controls the right wheels.
-2. WEMOS LOLIN LITE 32 V2
+2. `WEMOS_LOLIN32_LITE_BOT_V2.ino`
 The robot operates in arcade drive mode.
 The left joystick Y-axis controls forward and backward movement.
 The right joystick Y-axis controls clockwise and counterclockwise point turns.
