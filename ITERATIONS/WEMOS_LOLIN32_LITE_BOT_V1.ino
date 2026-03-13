@@ -114,6 +114,7 @@ void processGamepad(ControllerPtr ctl) {
   }
 
   if (L2 > 4) {
+    //Move forward if the left trigger is pressed
     digitalWrite(RightWheelsForward, HIGH);
     digitalWrite(RightWheelsReverse, LOW);
     digitalWrite(LeftWheelsForward, HIGH);
@@ -123,6 +124,7 @@ void processGamepad(ControllerPtr ctl) {
     analogWrite(leftWheels, L2);
   }
   if (R2 > 4) {
+    //Move backward if the right trigger is pressed
     digitalWrite(RightWheelsForward, LOW);
     digitalWrite(RightWheelsReverse, HIGH);
     digitalWrite(LeftWheelsForward, LOW);
@@ -146,7 +148,7 @@ void processControllers() {
 }
 
 void setup() {
-  //direction control for motors, for use with L298 motor driver
+  //Direction control for motors, for use with L298 motor driver
   pinMode(RightWheelsForward, OUTPUT);
   pinMode(RightWheelsReverse, OUTPUT);
   pinMode(LeftWheelsForward, OUTPUT);
@@ -156,7 +158,7 @@ void setup() {
   pinMode(rightWheels, OUTPUT);
   pinMode(leftWheels, OUTPUT);
 
-
+  //PWM channel configurations
   analogWriteFrequency(25000);
   analogWriteResolution(10);
 
